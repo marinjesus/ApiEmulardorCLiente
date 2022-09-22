@@ -1,0 +1,10 @@
+/.vs
+/ApiEmulardorCLiente/bin
+/ApiEmulardorCLiente/obj
+/ApiEmulardorCLiente/ApiEmulardorCLiente.csproj.user
+/ApiEmulardorCLiente.Core/bin
+/ApiEmulardorCLiente.Core/obj
+/ApiEmulardorCLiente.Repo/bin
+/ApiEmulardorCLiente.Repo/obj
+/ApiEmulardorCLiente.Service/bin
+/ApiEmulardorCLiente.Service/obj
