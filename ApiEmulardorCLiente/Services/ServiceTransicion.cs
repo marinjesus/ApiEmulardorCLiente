@@ -56,7 +56,9 @@ public class ServiceTransicion : Iservice<Transicion>
         {
             FilterDefinition<Transicion> filter = Builders<Transicion>.Filter.Empty;
             var builder = Builders<Transicion>.Filter;
-            filter = builder.Regex("IdEmpresa", new BsonRegularExpression(Id, "i")) & builder.Regex("Suministro", new BsonRegularExpression(Sumi, "i"));
+            filter = builder.Regex("IdEmpresa", new BsonRegularExpression(Id, "i"))
+                & builder.Regex("Suministro", new BsonRegularExpression(Sumi, "i")) 
+                & builder.Regex("Tipo", new BsonRegularExpression("CONSULTA", "i"));
             var myObj = await _db.Transicion.Find(filter).FirstOrDefaultAsync();
             var bsonObject = myObj.ToBsonDocument();
             Colletion = BsonSerializer.Deserialize<Transicion>(bsonObject);

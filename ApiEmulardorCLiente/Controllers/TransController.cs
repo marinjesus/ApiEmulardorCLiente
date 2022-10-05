@@ -1,6 +1,7 @@
 ﻿using ApiEmulardorCLiente.Controllers.Base;
 using ApiEmulardorCLiente.Core.Dtos;
 using ApiEmulardorCLiente.Core.Entities;
+using ApiEmulardorCLiente.Core.Helps;
 using ApiEmulardorCLiente.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -62,10 +63,10 @@ public class TransController : BaseApiController
                 case "401":
                 case "403":
                 case "404":
-                case "500":
                 case "502":
                 case "504":
-                    return StatusCode(response.error.);
+                    return StatusCode(response.error.ToInteger());
+                case "500":
                 default:
                     return StatusCode(500, "Internal server error");
             }
