@@ -25,4 +25,22 @@ public static class ClassAux
     {
         return JsonConvert.SerializeObject(val, Formatting.Indented, new JsonSerializerSettings() { PreserveReferencesHandling = PreserveReferencesHandling.None, ReferenceLoopHandling = ReferenceLoopHandling.Ignore, ObjectCreationHandling = ObjectCreationHandling.Reuse });
     }
+    public static Int32 ToInteger(this object val)
+    {
+        return ToInteger(val, 0);
+    }
+    public static Int32 ToInteger(this object val, Int32 def)
+    {
+        try
+        {
+            Int32 reval = 0;
+
+            if (Int32.TryParse(val.ToString(), out reval))
+                return reval;
+        }
+        catch (Exception)
+        {
+        }
+        return def;
+    }
 }

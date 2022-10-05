@@ -11,13 +11,13 @@ public class TransicionDto
     public string IdEmpresa { get; init; }
     public string Suministro { get; init; }
     public string error { get; init; }
-    public object[] data { get; init; }
+    public object data { get; init; }
 
     public TransicionDto()
     {
         IdEmpresa = string.Empty;
         Suministro = string.Empty;
         error = string.Empty;
-        data = new object[0];
+        data = string.Empty;
     }
 }

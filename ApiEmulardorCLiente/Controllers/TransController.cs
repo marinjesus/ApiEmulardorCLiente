@@ -5,6 +5,7 @@ using ApiEmulardorCLiente.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace ApiEmulardorCLiente.Controllers;
 
@@ -29,7 +30,10 @@ public class TransController : BaseApiController
         try
         {
             Transicion Transicionmapper = _mapper.Map<Transicion>(ModelDto);
+            string data = Convert.ToString(ModelDto.data);
+            Transicionmapper.Model = data;
             var Colletion = _Service.Add(Transicionmapper);
+            TransicionDto resul = _mapper.Map<TransicionDto>(Colletion.Result);
             return Ok(Colletion.Result);
         }
         catch (Exception ex)
@@ -45,8 +49,27 @@ public class TransController : BaseApiController
     {
         try
         {
-            var Colletion = _Service.GetFull();
-            return Ok(Colletion.Result);
+            var Colletion = _Service.GetId(Model.IdEmpresa, Model.Suministro);
+           var response = Colletion.Result;
+
+            switch (response.error)
+            {
+                case "200":
+                case "201":
+                case "202":
+                    return Ok(response);
+                case "400":
+                case "401":
+                case "403":
+                case "404":
+                case "500":
+                case "502":
+                case "504":
+                    return StatusCode(response.error.);
+                default:
+                    return StatusCode(500, "Internal server error");
+            }
+
         }
         catch (Exception ex)
         {
